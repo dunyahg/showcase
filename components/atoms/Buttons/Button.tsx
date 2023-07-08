@@ -3,13 +3,15 @@ import styled from 'styled-components'
 
 
 const CustomButton = styled.button`
- background : #C4C4C4;
- color : #030303;
+ background : #CF3C3C;
+ color : #FFF;
  padding: 0.6rem 2rem;
  letter-spacing: 0.6px;
  border: none;
  font-weight : 500;
  cursor : pointer;
+ border-radius : 0.4rem;
+
 `
 
 type BtnFields = {
