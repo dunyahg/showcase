@@ -7,35 +7,35 @@ import styled from 'styled-components'
 // import Button from '@/components/atoms/Buttons/Button';
 import Modal from 'react-modal';
 import ModalForm from '@/components/organisms/Forms/ModalForm';
+import Card from '@/components/atoms/Cards/Card';
 
 // Modal.setAppElement('#__next');
 
-const HeaderDiv = styled.div`
+const TopbarContent = styled.div`
     display : flex;
     align-items : center;
-    flex-direction : column;
-    margin-bottom : 3rem;
+    justify-content : space-between;
+    background : #fff;
+    padding : 1rem 2rem;
+    margin-bottom : 2rem;
    `
    
    const MainDiv = styled.div`
-     margin : 4rem;
+     display : flex;
+     justify-content : space-between;
    `
    
-   const ContentDiv = styled.div`
-    display : flex;
-    gap:3rem
-   `
    
-   const FirstContent = styled.div`
-    background : #C4C4C4;
+   const SidebarContent = styled.div`
+    background : #C93A3A;
     padding : 0.8rem 1.2rem;
-    height : 50vh;
+    height : 96vh;
+    width : 15%;
    `
    
-   const LastContent = styled.div`
-   background : #C4C4C4;
-   width : 60%;
-   padding : 0.8rem 1.2rem;
+   const MainContent = styled.div`
+   background : #F0F0F0;
+   width : 100%;
    `
    
    const ModalHeader = styled.div`
@@ -44,17 +44,25 @@ const HeaderDiv = styled.div`
     justify-content: space-between;
    `
    const Button = styled.button`
-   background : #C4C4C4;
-   color : #030303;
+   background : #C93A3A;
+   color : #fff;
    padding: 0.6rem 2rem;
    letter-spacing: 0.6px;
    border: none;
    font-weight : 500;
+   border-radius : 0.2rem;
+   `
+
+   const SubTopbar = styled.div`
+     background : #fff;
+     padding : 1rem;
+     margin: 1rem;
    `
 
    const A = styled.a`
     text-decoration : none;
     color : #000;
+    cursor : pointer;
    `
    
    const customStyles = {
@@ -81,6 +89,13 @@ const HeaderDiv = styled.div`
       z-index: 9999;
     `;
 
+    const CardDiv = styled.div`
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 0.4rem;
+      `
+
+//F0F0F0
 
 const Dashboard = () => {
 
@@ -115,6 +130,10 @@ const closeModal = () => {
     setIsOpen(false);
 }
 
+const LogoutEvent = () => {
+    router.push('/')
+}
+
 const SubmitEducationalInfo = (data : any) => {
     console.log(data)
     
@@ -127,27 +146,26 @@ const SubmitEducationalInfo = (data : any) => {
 
   return (
     <MainDiv>
-        <HeaderDiv>
-            <p> Welcome to {education?.state?.name}&apos;s education page</p>
-             {/* <Button text='Add new education' btnType='submit' /> */}
-             <Button onClick={openModal}> Add new education</Button>
-        </HeaderDiv>
-        <ContentDiv>
-            <FirstContent>
+       
+            <SidebarContent>
                 <Sidebar />
-            </FirstContent>
-            <LastContent>
-                
+            </SidebarContent>
+            <MainContent>
+                <TopbarContent>
+                  <p> Welcome to {education?.state?.name}&apos;s education page</p>
+                  <A onClick={LogoutEvent}> Logout</A>
+               </TopbarContent>
+                 <SubTopbar>
+                       <Button onClick={openModal}> Add new education</Button>
+                 </SubTopbar>
+                  <CardDiv>
                   {education.state.educationalHistory && education.state.educationalHistory.map((data:any, index : number) => (
-                     <div key={index}>
-                         <h5>{data.degree} {data.study} @ {data.school}</h5>
-                         <p>{data.startMonth} {data.startYear} - {data.endMonth} {data.endYear}</p>
-                          <li>{data.description}</li>   
-                     </div>
+                    <Card key={index} degree={data.degree} study={data.study} school={data.school} startMonth={data.startMonth} startYear={data.startYear} endMonth={data.endMonth} endYear={data.endYear} description={data.description} />
                   ))}
+                  </CardDiv>
+               
               
-            </LastContent>
-        </ContentDiv>
+            </MainContent>
 
         <Modal
           isOpen={modalIsOpen}
