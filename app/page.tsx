@@ -7,24 +7,26 @@ import { useRouter } from 'next/navigation'
 
 
   const Div = styled.div`
-  display : flex;
-  align-items : center;
-  justify-content : center;
-  height : 100vh;
-  background : #C93A3A;
+    display : flex;
+    align-items : center;
+    justify-content : center;
+    height : 100vh;
+    background : #C93A3A;
   `
   
   const LoginContent = styled.div`
-    background : #fff;
-    border-radius: 0.375rem;
-    padding-left : 1.5rem;
-    padding-right : 1.5rem;
-    height: 50%;
-    display:flex;
-    align-items : center;
-    justify-content : center;
-    flex-direction:column;
-    gap:2rem;
+      background : #fff;
+      border-radius: 0.375rem;
+      padding-left : 1.5rem;
+      padding-right : 1.5rem;
+      height: 50%;
+      display:flex;
+      align-items : center;
+      justify-content : center;
+      flex-direction:column;
+      margin-left:1.5rem;
+      margin-right:1.5rem;
+      gap:2rem;
   `
 
 

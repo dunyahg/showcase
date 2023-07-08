@@ -22,12 +22,12 @@ function Select({ options,label, register, error } : SelectProps ) {
  `
 
  const Select = styled.select`
-  padding : 0.6rem 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  color: #333;
-  width : 100%;
+    padding : 0.6rem 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+    width : 100%;
 
   &:focus {
     outline: none;
@@ -36,9 +36,9 @@ function Select({ options,label, register, error } : SelectProps ) {
  `
 
  const Div = styled.div`
- display : flex;
- flex-direction : column;
- gap : 0.6rem;
+  display : flex;
+  flex-direction : column;
+  gap : 0.6rem;
  `
 
   return (

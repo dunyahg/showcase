@@ -43,11 +43,6 @@ function InputField({label,placeholder,register,error, onChange, value} : InputV
         <Input key={label} placeholder={placeholder} {...register} value={value}  onChange={onChange}
           />
           {error && <P>{error}</P>}
-          {/* value={education.state.searchText} onChange={(e: any) => {
-          education.updateState({
-            searchText: e.target.value
-          }) */}
-        
     </Div>
     </>
 

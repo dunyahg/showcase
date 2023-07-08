@@ -31,11 +31,19 @@ const ButtonLeft = styled.div`
 float : right;
 `
 
+const List = styled.div`
+ padding : 0.4rem 0;
+ background : #EEE;
+ padding-left: 0.6rem;
+ cursor : pointer;
+`
+
+
 function ModalForm({onSubmit} : FormProps) {
 
 
 
-    const { handleSubmit, register, formState: { errors } } = useForm();
+    const { handleSubmit, register, formState: { errors }, watch, } = useForm();
 
     const months = [
         {value: "January", name:"January"},
@@ -103,6 +111,19 @@ function ModalForm({onSubmit} : FormProps) {
         return years;
       };
 
+      const SelectIntitution = () => {
+           console.log("data")
+      }
+
+      const startYear = watch('startYear');
+      const endYear = watch('endYear');
+      const validateYear = () => {
+        if (startYear && endYear && startYear > endYear) {
+            return 'Start year cannot be greater than end year';
+          }
+          return true;
+      };
+
       const [year, setYear] =useState<any>(getNextYears)
 
   return (
@@ -113,7 +134,7 @@ function ModalForm({onSubmit} : FormProps) {
                      <FormField placeholder='Name of school' value={inputValue} onChange={handleInputChange} label='Name of School' register={register('school', { required: 'School name is required' })} error={errors.school?.message} />   
                       <div>
                       {education.state.institutions && education.state.institutions.splice(0, 10).map((data:Institution, index : number) => (
-                            <li key={index}>{data.name}</li>
+                            <List onClick={SelectIntitution} key={index}>{data.name}</List>
                         ))}
                       </div> 
                 </FormGroup>
@@ -146,7 +167,7 @@ function ModalForm({onSubmit} : FormProps) {
                             <SelectField label='End month' register={register('endMonth', { required: 'End month is required' })} error={errors.endMonth?.message}  options={month}/>
                             </DivHalf>
                             <DivHalf>
-                            <SelectField label='End year' register={register('endYear', { required: 'End year is required' })} error={errors.endYear?.message}  options={year}/>
+                            <SelectField label='End year' register={register('endYear', { required: 'End year is required', validate: validateYear })} error={errors.endYear?.message}  options={year}/>
                             </DivHalf>
                         </Row>
                      </DivHalf>

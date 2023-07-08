@@ -13,9 +13,9 @@ const HeaderFour = styled.h4`
 `
 
 const Para = styled.p`
-color : #fff;
-font-size : 0.9rem;
-padding-bottom:1.2rem;
+  color : #fff;
+  font-size : 0.9rem;
+  padding-bottom:1.2rem;
 `
 
 function Sidebar() {

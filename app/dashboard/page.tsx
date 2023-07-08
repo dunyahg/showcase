@@ -9,14 +9,13 @@ import Modal from 'react-modal';
 import ModalForm from '@/components/organisms/Forms/ModalForm';
 import Card from '@/components/atoms/Cards/Card';
 
-// Modal.setAppElement('#__next');
 
 const TopbarContent = styled.div`
     display : flex;
     align-items : center;
     justify-content : space-between;
     background : #fff;
-    padding : 1rem 2rem;
+    padding : 1rem 2.5rem;
     margin-bottom : 2rem;
    `
    
