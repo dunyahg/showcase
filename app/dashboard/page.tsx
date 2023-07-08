@@ -128,7 +128,7 @@ const SubmitEducationalInfo = (data : any) => {
   return (
     <MainDiv>
         <HeaderDiv>
-            <p> Welcome to {education?.state?.name}'s education page</p>
+            <p> Welcome to {education?.state?.name}&apos;s education page</p>
              {/* <Button text='Add new education' btnType='submit' /> */}
              <Button onClick={openModal}> Add new education</Button>
         </HeaderDiv>
