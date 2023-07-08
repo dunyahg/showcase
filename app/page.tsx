@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation'
   display : flex;
   align-items : center;
   justify-content : center;
-  height : 97vh;
+  height : 100vh;
   background : #C93A3A;
   `
   

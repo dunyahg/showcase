@@ -51,6 +51,7 @@ const TopbarContent = styled.div`
    border: none;
    font-weight : 500;
    border-radius : 0.2rem;
+   cursor : pointer;
    `
 
    const SubTopbar = styled.div`
@@ -156,7 +157,7 @@ const SubmitEducationalInfo = (data : any) => {
                   <A onClick={LogoutEvent}> Logout</A>
                </TopbarContent>
                  <SubTopbar>
-                       <Button onClick={openModal}> Add new education</Button>
+                       <Button onClick={openModal} > Add new education</Button>
                  </SubTopbar>
                   <CardDiv>
                   {education.state.educationalHistory && education.state.educationalHistory.map((data:any, index : number) => (

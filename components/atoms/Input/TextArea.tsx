@@ -8,24 +8,36 @@ type Props = {
  error : any;
 }
 
+
+const P = styled.p`
+color : red;
+`
+const Textarea = styled.textarea`
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+    padding : 0.5rem;
+
+    &:focus {
+        outline: none;
+        border-color: #ccc;
+      }
+`
+
+const Div = styled.div`
+    display : flex;
+    flex-direction : column;
+    gap : 0.6rem;
+ `
+
 function TextArea({label,register, error} : Props) {
-
-
-    const P = styled.p`
-    color : red;
-    `
-
-    const Div = styled.div`
-        display : flex;
-        flex-direction : column;
-        gap : 0.6rem;
-     `
 
   return (
     
     <Div>
         <label>{label}</label>
-        <textarea {...register} rows={5} ></textarea>
+        <Textarea {...register} rows={5} ></Textarea>
         {error && <P>{error}</P>}
     </Div>
   )
