@@ -5,7 +5,7 @@ import axios from "axios";
 export default { 
     getInstitutions: async ({ name, country }: any): Promise<Institution[]> => {
 
-        const institutions: Institution[] = (await axios(BASE_URL+`/search?name=${name}&country=${country}`)).data
+        const institutions: Institution[] = (await axios(BASE_URL+`/search?name=${name}`)).data
 
         return institutions;
     },

@@ -127,9 +127,10 @@ const TopbarContent = styled.div`
          bottom: 'auto',
          marginRight: '-50%',
          transform: 'translate(-50%, -50%)',
-         width : '45%'
+          width: '45%'
        },
      };
+
 
     const GlobalStyles = createGlobalStyle`
     .overlay-styles {
@@ -143,16 +144,11 @@ const TopbarContent = styled.div`
     }
 
       .modal-styles {
-       
+        
       }
  `;
     // customStyles.content.width = '85%'; // Set initial width
 
-      const mediaQueryStyles = `
-      @media (max-width: 768px) {
-        width: 80%;
-      }
-    `;
 
     const CardDiv = styled.div`
 
@@ -270,7 +266,6 @@ const SubmitEducationalInfo = (data : any) => {
           overlayClassName="overlay-styles"
         >
           <GlobalStyles />
-          <style>{mediaQueryStyles}</style>
             <ModalHeader>
                 <h3 ref={(_subtitle) => (subtitle = _subtitle)}>New educational Modal</h3>
                 <A href='#' onClick={closeModal}>x</A>

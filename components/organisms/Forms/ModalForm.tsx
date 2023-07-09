@@ -71,7 +71,7 @@ function ModalForm({onSubmit} : FormProps) {
       const [searchValue] = useDebounce(inputValue, 2000);
 
       const { data } = useQuery(['institutions', searchValue], () => {
-        return  institutionService.getInstitutions({ name: inputValue, country:'' })
+        return  institutionService.getInstitutions({ name: inputValue })
       })
 
       useEffect(() => {
@@ -139,8 +139,10 @@ function ModalForm({onSubmit} : FormProps) {
                 <FormGroup>
                      <FormField placeholder='Name of school' value={inputValue} onChange={handleInputChange}  label='Name of School' register={register('school', { required: 'School name is required' })} error={errors.school?.message}  />   
                       <ListDiv>
-                      {education.state.institutions && education.state.institutions.splice(0, 10).map((data:Institution, index : number) => (
-                            <List onClick={selectInstitution} key={index}>{data.name}</List>
+                      { education.state.institutions && education.state.institutions.splice(0, 10).map((data:Institution, index : number) => (
+                             searchValue && (
+                              <List onClick={selectInstitution} key={index}>{data.name}</List>
+                            )
                         ))}
                       </ListDiv> 
                 </FormGroup>
