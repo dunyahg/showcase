@@ -26,16 +26,24 @@ const TopbarContent = styled.div`
    
    
    const SidebarContent = styled.div`
+
+   display : hidden;
+   width : 0;
+
+   @media (min-width: 768px) {
     background : #C93A3A;
     padding : 0.8rem 1.2rem;
     height : 96vh;
     width : 15%;
+  }
+   
    `
    
    const MainContent = styled.div`
-   background : #F0F0F0;
-   width : 100%;
-   `
+    background : #F0F0F0;
+    width : 100%;
+    height : 100vh;
+    `
    
    const ModalHeader = styled.div`
     display : flex;
@@ -43,21 +51,21 @@ const TopbarContent = styled.div`
     justify-content: space-between;
    `
    const Button = styled.button`
-   background : #C93A3A;
-   color : #fff;
-   padding: 0.6rem 2rem;
-   letter-spacing: 0.6px;
-   border: none;
-   font-weight : 500;
-   border-radius : 0.2rem;
-   cursor : pointer;
-   `
+    background : #C93A3A;
+    color : #fff;
+    padding: 0.6rem 2rem;
+    letter-spacing: 0.6px;
+    border: none;
+    font-weight : 500;
+    border-radius : 0.2rem;
+    cursor : pointer;
+    `
 
    const SubTopbar = styled.div`
      background : #fff;
      padding : 1rem;
      margin: 1rem;
-   `
+    `
 
    const A = styled.a`
     text-decoration : none;
@@ -65,6 +73,11 @@ const TopbarContent = styled.div`
     cursor : pointer;
    `
    
+   interface ModalContainerProps {
+    width: string;
+  }
+
+
    const customStyles = {
        content: {
          top: '50%',
@@ -73,9 +86,11 @@ const TopbarContent = styled.div`
          bottom: 'auto',
          marginRight: '-50%',
          transform: 'translate(-50%, -50%)',
-         width : '45%',
+         width : '45%'
        },
      };
+
+    // customStyles.content.width = '85%'; // Set initial width
 
      const Overlay = styled.div.attrs(() => ({
       className: 'overlay-styles'
@@ -90,12 +105,24 @@ const TopbarContent = styled.div`
     `;
 
     const CardDiv = styled.div`
+
+     display : grid;
+     grid-template-columns : repeat(1,1fr);
+      
+     @media (min-width: 768px) {
+     
+      display : grid;
+      grid-template-columns : repeat(2,1fr); 
+      gap: 0.4rem;
+    }
+
+    @media (min-width: 1200px) {
       display: grid;
       grid-template-columns: repeat(3,1fr);
       gap: 0.4rem;
-      `
+    }
+     `
 
-//F0F0F0
 
 const Dashboard = () => {
 
@@ -132,6 +159,11 @@ const closeModal = () => {
 
 const LogoutEvent = () => {
     router.push('/')
+    education.updateState({
+       institutions : [],
+       educationalHistory : [],
+       name :''
+    })
 }
 
 const SubmitEducationalInfo = (data : any) => {

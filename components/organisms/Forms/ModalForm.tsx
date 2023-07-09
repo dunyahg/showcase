@@ -19,25 +19,29 @@ const FormGroup = styled.div`
 margin-bottom : 1rem;
 `
 const Row = styled.div`
- display : flex;
- gap : 1rem;
- align-items : start;
- width : 100%;
-`
-const DivHalf = styled.div`
- width : 50%;
-`
+    display : flex;
+    align-items : start;
+    width : 100%;
+    gap:1rem;
+    `
+const DivHalf = styled.div` 
+    width : 50%;
+    `
 const ButtonLeft = styled.div`
-float : right;
-`
+    float : right;
+    `
 
 const List = styled.div`
- padding : 0.4rem 0;
- background : #EEE;
- padding-left: 0.6rem;
- cursor : pointer;
-`
+    padding : 0.4rem 0;
+    background : #EEE;
+    padding-left: 0.6rem;
+    cursor : pointer;
+    `
 
+const ListDiv = styled.div`
+  position : absolute;
+  width : 94%;
+`
 
 function ModalForm({onSubmit} : FormProps) {
 
@@ -64,22 +68,18 @@ function ModalForm({onSubmit} : FormProps) {
 
     const [inputValue, setInputValue] = useState('');
 
-    const { data } = useQuery(['institutions', inputValue], () => {
+      const [searchValue] = useDebounce(inputValue, 2000);
+
+      const { data } = useQuery(['institutions', searchValue], () => {
         return  institutionService.getInstitutions({ name: inputValue, country:'' })
       })
 
-      const [searchValue] = useDebounce(inputValue, 3000);
-    // console.log("Search result : ", searchValue)
-      
       useEffect(() => {
       
         if(data) {
-         console.log("Modal : ", data)
-          console.log(data, inputValue)
-      
+
           education.updateState({
             institutions:  data,
-            
           })
         }
       }, [data])
@@ -87,6 +87,7 @@ function ModalForm({onSubmit} : FormProps) {
      
       const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         setInputValue(event.target.value);
+        
         //console.log("Search value ",inputValue)
       };
 
@@ -111,8 +112,13 @@ function ModalForm({onSubmit} : FormProps) {
         return years;
       };
 
-      const SelectIntitution = () => {
-           console.log("data")
+      const selectInstitution = (event: any) => {
+
+           setInputValue(event.target.innerHTML)
+           console.log("school : ", event.target.innerHTML)
+           education.updateState({
+                institutions: [],
+            })
       }
 
       const startYear = watch('startYear');
@@ -131,12 +137,12 @@ function ModalForm({onSubmit} : FormProps) {
         <form onSubmit={handleSubmit(handleFormSubmit)}>
             <div >
                 <FormGroup>
-                     <FormField placeholder='Name of school' value={inputValue} onChange={handleInputChange} label='Name of School' register={register('school', { required: 'School name is required' })} error={errors.school?.message} />   
-                      <div>
+                     <FormField placeholder='Name of school' value={inputValue} onChange={handleInputChange}  label='Name of School' register={register('school', { required: 'School name is required' })} error={errors.school?.message}  />   
+                      <ListDiv>
                       {education.state.institutions && education.state.institutions.splice(0, 10).map((data:Institution, index : number) => (
-                            <List onClick={SelectIntitution} key={index}>{data.name}</List>
+                            <List onClick={selectInstitution} key={index}>{data.name}</List>
                         ))}
-                      </div> 
+                      </ListDiv> 
                 </FormGroup>
                 <FormGroup>
                   <Row>

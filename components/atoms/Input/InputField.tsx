@@ -1,5 +1,5 @@
 import { InputValue } from '@/interfaces/InputValues';
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 import { UseFormRegisterReturn } from 'react-hook-form';
 import styled from 'styled-components';
 import useEducation from '@/hooks/useEducation'
@@ -40,7 +40,7 @@ function InputField({label,placeholder,register,error, onChange, value} : InputV
     <>
       <Div>
         <label> {label}</label>
-        <Input key={label} placeholder={placeholder} {...register} value={value}  onChange={onChange}
+        <Input key={label} placeholder={placeholder} {...register} value={value} onChange={onChange} 
           />
           {error && <P>{error}</P>}
     </Div>
