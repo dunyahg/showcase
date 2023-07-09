@@ -48,6 +48,7 @@ const TopbarContent = styled.div`
     display : flex;
     align-items : start;
     justify-content: space-between;
+    margin-bottom : 1rem;
    `
    const Button = styled.button`
     background : #C93A3A;
