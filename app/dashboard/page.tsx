@@ -7,6 +7,7 @@ import styled,{ createGlobalStyle } from 'styled-components'
 import Modal from 'react-modal';
 import ModalForm from '@/components/organisms/Forms/ModalForm';
 import Card from '@/components/atoms/Cards/Card';
+import { FiAlignJustify } from "react-icons/fi";
 
 
 const TopbarContent = styled.div`
@@ -26,11 +27,11 @@ const TopbarContent = styled.div`
    
    const SidebarContent = styled.div`
 
-   display : hidden;
-   width : 0;
+   display : none;
 
    @media (min-width: 768px) {
     background : #C93A3A;
+    display:block;
     padding : 0.8rem 1.2rem;
     height : 96vh;
     width : 15%;
@@ -72,6 +73,51 @@ const TopbarContent = styled.div`
     color : #000;
     cursor : pointer;
    `;
+
+   const BackgroundOverlay = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 49;
+   `
+   const SidebarResp = styled.div`
+    width: 50%;
+    top: 0;
+    left: 0;
+    height: 100%;
+    position: fixed;
+    z-index: 19999;
+    transition-property: transform;
+    transition-timing-function: ease-in-out;
+    transition-duration: 300ms;
+    transform: translateX(0);
+    background : #C93A3A;
+    padding-left : 0.5rem;
+   `
+
+   const HeaderAnchor = styled.a`
+     display : none;
+
+     @media (min-width: 768px) {
+      text-decoration : none;
+      color : #000;
+      display : block;
+      cursor : pointer;
+    }
+   `
+   const ShowMenuOnSmallerScreen = styled.a`
+     
+   cursor : pointer;
+   display : block;
+   z-index : 9999;
+
+   @media (min-width: 768px) {
+    display : none; 
+  }
+   `
 
    const customStyles  = {
        content: {
@@ -132,7 +178,7 @@ const Dashboard = () => {
     const router = useRouter()
 
     const [modalIsOpen, setIsOpen] = React.useState(false);
-
+    const [showSidebar,setShowSidebar] = useState(false)
     
 
    let education = useEducation();
@@ -188,7 +234,8 @@ const SubmitEducationalInfo = (data : any) => {
             <MainContent>
                 <TopbarContent>
                   <p> Welcome to {education?.state?.name}&apos;s education page</p>
-                  <A onClick={LogoutEvent}> Logout</A>
+                  <HeaderAnchor onClick={LogoutEvent}> Logout</HeaderAnchor>
+                  <ShowMenuOnSmallerScreen onClick={() => setShowSidebar(!showSidebar)}> <FiAlignJustify /></ShowMenuOnSmallerScreen>
                </TopbarContent>
                  <SubTopbar>
                        <Button onClick={openModal} > Add new education</Button>
@@ -201,6 +248,17 @@ const SubmitEducationalInfo = (data : any) => {
                
               
             </MainContent>
+
+            {showSidebar && (
+             
+                <BackgroundOverlay>
+                   <SidebarResp>
+                      <Sidebar />
+                      </SidebarResp>
+                </BackgroundOverlay>   
+             
+            
+            )}
 
         <Modal
           isOpen={modalIsOpen}
