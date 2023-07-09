@@ -3,8 +3,7 @@ import React, {useEffect, useState} from 'react'
 import useEducation from '@/hooks/useEducation'
 import { useRouter } from 'next/navigation';
 import Sidebar from '@/components/organisms/Sidebar/Sidebar';
-import styled from 'styled-components'
-// import Button from '@/components/atoms/Buttons/Button';
+import styled,{ createGlobalStyle } from 'styled-components'
 import Modal from 'react-modal';
 import ModalForm from '@/components/organisms/Forms/ModalForm';
 import Card from '@/components/atoms/Cards/Card';
@@ -71,14 +70,9 @@ const TopbarContent = styled.div`
     text-decoration : none;
     color : #000;
     cursor : pointer;
-   `
-   
-   interface ModalContainerProps {
-    width: string;
-  }
+   `;
 
-
-   const customStyles = {
+   const customStyles  = {
        content: {
          top: '50%',
          left: '50%',
@@ -90,18 +84,27 @@ const TopbarContent = styled.div`
        },
      };
 
+    const GlobalStyles = createGlobalStyle`
+    .overlay-styles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+    }
+
+      .modal-styles {
+       
+      }
+ `;
     // customStyles.content.width = '85%'; // Set initial width
 
-     const Overlay = styled.div.attrs(() => ({
-      className: 'overlay-styles'
-    }))`
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 9999;
+      const mediaQueryStyles = `
+      @media (max-width: 768px) {
+        width: 80%;
+      }
     `;
 
     const CardDiv = styled.div`
@@ -122,7 +125,6 @@ const TopbarContent = styled.div`
       gap: 0.4rem;
     }
      `
-
 
 const Dashboard = () => {
 
@@ -208,6 +210,8 @@ const SubmitEducationalInfo = (data : any) => {
           contentLabel="Educational form"
           overlayClassName="overlay-styles"
         >
+          <GlobalStyles />
+          <style>{mediaQueryStyles}</style>
             <ModalHeader>
                 <h3 ref={(_subtitle) => (subtitle = _subtitle)}>New educational Modal</h3>
                 <A href='#' onClick={closeModal}>x</A>
